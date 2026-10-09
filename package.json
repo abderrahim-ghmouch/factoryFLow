@@ -1,0 +1,29 @@
+{
+  "name": "factoryflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abderrahim-ghmouch/factoryFLow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abderrahim-ghmouch/factoryFLow/issues"
+  },
+  "homepage": "https://github.com/abderrahim-ghmouch/factoryFLow#readme",
+  "dependencies": {
+    "dotenv": "^18.0.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

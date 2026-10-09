@@ -1,0 +1,43 @@
+
+services:
+  mongo:
+
+    image: mongo:7
+
+    container_name: factoryflow-mongo
+
+    restart: unless-stopped
+
+    ports:
+
+      - "27017:27017"
+
+    volumes:
+
+      - mongo_data:/data/db
+
+ 
+  backend:
+
+    build: .
+
+    container_name: factoryflow-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      MONGO_URI: mongodb://mongo:27017/factoryflow
+
+    depends_on:
+      - mongo
+    
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
+  
+volumes:
+  mongo_data:
