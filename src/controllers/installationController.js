@@ -1,22 +1,42 @@
-import installationService from '../services/installationService.js'
+import { getStatus, install } from '../services/installationService.js'
 
 
-export async function getStatus(req, res, next) {
+//la status actuel
+export async function Status(req, res) {
 
+  try {
+    const status = await getStatus()
 
-    try {
-      
-        const status = await installationService.getStatus()
-        
-        return res.status(200).json(status)
-        
-    } catch (error) {
-        
-        if (next) return next(error)
-        
-
-    }
+    return res.status(200).json(status)
   }
+  catch (error) {
+
+    console.error('error founded ',error.Message)
+
+  }
+}
 
 
-export default installationController
+//fucn de creation de la premiere adimn
+export async function install(req, res)
+  {
+    
+  try {
+      
+    const { name, email, password} = req.body
+      
+    const result = await install(name, email, password)
+  
+    return res.status(200).json(result)
+    
+      
+    } catch (error)
+    {
+      
+    console.error(Message.error)
+    
+    return res.status
+  }
+}
+
+
