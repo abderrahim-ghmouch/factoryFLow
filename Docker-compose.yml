@@ -1,26 +1,21 @@
-
 services:
   mongo:
-
     image: mongo:7
-
     container_name: factoryflow-mongo
-
     restart: unless-stopped
-
     ports:
-
       - "27017:27017"
-
     volumes:
-
       - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
 
- 
   backend:
-
     build: .
-
     container_name: factoryflow-backend
     restart: unless-stopped
     ports:
@@ -29,15 +24,13 @@ services:
       - .env
     environment:
       MONGO_URI: mongodb://mongo:27017/factoryflow
-
     depends_on:
-      - mongo
-    
-
+      mongo:
+        condition: service_healthy
     volumes:
       - .:/app
       - /app/node_modules
     command: npm run dev
-  
+
 volumes:
   mongo_data:
